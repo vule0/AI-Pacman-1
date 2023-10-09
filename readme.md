@@ -1,4 +1,75 @@
-the start to the goal. These actions all have to be legal moves (valid directions, no moving through walls).
+Introduction
+In this project, your Pacman agent will find paths through his maze world, both to reach a particular location and to collect food efficiently. You will build general search algorithms and apply them to Pacman scenarios.
+
+As in Project 0, this project includes an autograder for you to grade your answers on your machine. This can be run with the command:
+
+python autograder.py
+See the autograder tutorial in Project 0 for more information about using the autograder.
+
+The code for this project consists of several Python files, some of which you will need to read and understand in order to complete the assignment and some of which you can ignore. You can download all the code and supporting files as a zip archive named search.zip.Download search.zip.
+
+Files you'll edit:
+search.py	Where all of your search algorithms will reside.
+searchAgents.py	Where all of your search-based agents will reside.
+Files you might want to look at:
+pacman.py	The main file that runs Pacman games. This file describes a Pacman GameState type, which you use in this project.
+game.py	The logic behind how the Pacman world works. This file describes several supporting types like AgentState, Agent, Direction, and Grid.
+util.py	Useful data structures for implementing search algorithms.
+Supporting files you can ignore:
+graphicsDisplay.py	Graphics for Pacman
+graphicsUtils.py	Support for Pacman graphics
+textDisplay.py	ASCII graphics for Pacman
+ghostAgents.py	Agents to control ghosts
+keyboardAgents.py	Keyboard interfaces to control Pacman
+layout.py	Code for reading layout files and storing their contents
+autograder.py	Project autograder
+testParser.py	Parses autograder test and solution files
+testClasses.py	General autograding test classes
+test_cases/	A directory containing the test cases for each question
+searchTestClasses.py	Project 1 specific autograding test classes
+Files to Edit and Submit: You will fill in portions of search.py and searchAgents.py during the assignment. Once you have completed the assignment, you will submit these two files. Optionally, if you used any external packages (this should not be necessary), please include a requirements.txt with all of your dependencies so that the TAs can easily install these packages using pip.
+
+Evaluation: Your code will be autograded for technical correctness. Please do not change the names of any provided functions or classes within the code, or you will wreak havoc on the autograder (to the detriment of your score). However, the correctness of your implementation – not the autograder’s judgments – will be the final judge of your score. If necessary, we will review and grade assignments individually to ensure that you receive due credit for your work.
+
+Academic Dishonesty: We will be checking your code against other submissions in the class for logical redundancy. If you copy someone else’s code and submit it with minor changes, we will know. These cheat detectors are quite hard to fool, so please don’t try. We trust you all to submit your own work only; please don’t let us down. If you do, we will pursue the strongest consequences available to us.
+
+Getting Help: You are not alone! If you find yourself stuck on something, contact the course staff for help. Office hours are there for your support; please use them. If you can’t make our office hours, let us know and we will schedule more. We want these projects to be rewarding and instructional, not frustrating and demoralizing. But, we don’t know when or how to help unless you ask.
+
+Grade Weighting
+The final score will be out of 100 points. Each of the sections below (which sum to 25 points) will be multiplied by 4 for your final score. You can have a good estimate of your score before submitting the assignment since the autograder is provided with some test cases. However, passing all provided test cases will not guarantee a perfect score. We may run hidden test cases and inspect your code for a more thorough evaluation of your code's correctness. We encourage you to stress-test your code beyond the provided test cases.
+
+Welcome to Pacman
+After downloading the code (search.zip Download search.zip), unzipping it, and changing to the directory, you should be able to play a game of Pacman by typing the following at the command line:
+
+python pacman.py
+Pacman lives in a shiny blue world of twisting corridors and tasty round treats. Navigating this world efficiently will be Pacman’s first step in mastering his domain.
+
+The simplest agent in searchAgents.py is called the GoWestAgent, which always goes West (a trivial reflex agent). This agent can occasionally win:
+
+python pacman.py --layout testMaze --pacman GoWestAgent
+But, things get ugly for this agent when turning is required:
+
+python pacman.py --layout tinyMaze --pacman GoWestAgent
+If Pacman gets stuck, you can exit the game by typing CTRL-c into your terminal.
+
+Soon, your agent will solve not only tinyMaze, but any maze you want.
+
+Note that pacman.py supports a number of options that can each be expressed in a long way (e.g., --layout) or a short way (e.g., -l). You can see the list of all options and their default values via:
+
+python pacman.py -h
+Also, all of the commands that appear in this project also appear in commands.txt, for easy copying and pasting. In UNIX/Mac OS X, you can even run all these commands in order with bash commands.txt.
+
+Question 1 (3 points): Finding a Fixed Food Dot using Depth First Search
+In searchAgents.py, you’ll find a fully implemented SearchAgent, which plans out a path through Pacman’s world and then executes that path step-by-step. The search algorithms for formulating a plan are not implemented – that’s your job.
+
+First, test that the SearchAgent is working correctly by running:
+
+python pacman.py -l tinyMaze -p SearchAgent -a fn=tinyMazeSearch
+The command above tells the SearchAgent to use tinyMazeSearch as its search algorithm, which is implemented in search.py. Pacman should navigate the maze successfully.
+
+Now it’s time to write full-fledged generic search functions to help Pacman plan routes! Pseudocode/descriptions for the search algorithms you’ll write can be found in the lecture slides & textbook. Remember that a search node must contain not only a state but also the information necessary to reconstruct the path (plan) which gets to that state.
+
+Important note: All of your search functions need to return a list of actions that will lead the agent from the start to the goal. These actions all have to be legal moves (valid directions, no moving through walls).
 
 Important note: Make sure to use the Stack, Queue and PriorityQueue data structures provided to you in util.py! These data structure implementations have particular properties which are required for compatibility with the autograder.
 
